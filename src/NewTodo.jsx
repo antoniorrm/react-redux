@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class NewTodo extends Component {
+import { tarefasNovaTarefa } from './reduxModules/tarefas/actions';
+class NewTodo extends Component {
     state = {
         novaTarefa: '',
     };
@@ -12,6 +14,9 @@ export default class NewTodo extends Component {
     };
 
     onButtonClick = () => {
+        this.props.tarefasNovaTarefa(
+            this.state.novaTarefa
+        );
         this.setState({
             novaTarefa: '',
         });
@@ -40,3 +45,13 @@ export default class NewTodo extends Component {
     }
 }
 
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+    tarefasNovaTarefa,
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NewTodo);

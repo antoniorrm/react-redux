@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-export default class TodoList extends Component {
+import { connect } from 'react-redux';
+class TodoList extends Component {
     constructor(props) {
         super(props);
 
@@ -10,7 +10,7 @@ export default class TodoList extends Component {
     }
 
     render() {
-        const { tarefas } = this.state;
+        const { tarefas } = this.props;
         return (
             <div className="row">
                 <div className="col-12">
@@ -27,3 +27,14 @@ export default class TodoList extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    tarefas: state.stateTarefas.tarefas
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoList);

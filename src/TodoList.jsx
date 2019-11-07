@@ -1,40 +1,23 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-class TodoList extends Component {
-    constructor(props) {
-        super(props);
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-        this.state = {
-            tarefas: ['Alimentar o cachorro'],
-        };
-    }
+export default function TodoList() {
 
-    render() {
-        const { tarefas } = this.props;
-        return (
-            <div className="row">
-                <div className="col-12">
-                    <h3>Tarefas</h3>
-                    <div className="list-group">
-                        {tarefas.map((tarefa, index) => (
-                            <div className="list-group-item" key={tarefa}>
-                                <h5>{tarefa}</h5>
-                            </div>
-                        ))}
-                    </div>
+    const tarefas = useSelector(state => state.stateTarefas.tarefas);
+
+    return (
+        <div className="row">
+            <div className="col-12">
+                <h3>Tarefas</h3>
+                <div className="list-group">
+                    {tarefas.map((tarefa, index) => (
+                        <div className="list-group-item" key={index}>
+                            <h5>{tarefa}</h5>
+                        </div>
+                    ))}
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
-const mapStateToProps = state => ({
-    tarefas: state.stateTarefas.tarefas
-});
-
-const mapDispatchToProps = {};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TodoList);
